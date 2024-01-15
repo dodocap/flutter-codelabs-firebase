@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart'
     hide EmailAuthProvider, PhoneAuthProvider;
 import 'package:flutter/material.dart';
+import 'package:gtk_flutter/yes_no_selection.dart';
 import 'package:provider/provider.dart';
 
 import 'app_state.dart';
@@ -52,6 +53,10 @@ class HomePage extends StatelessWidget {
                   _ => const Paragraph('No one going'),
                 },
                 if (appState.loggedIn) ...[
+                  YesNoSelection(
+                    state: appState.attending,
+                    onSelection: (attending) => appState.attending = attending,
+                  ),
                   const Header('Discussion'),
                   GuestBook(
                     addMessage: (message) =>
